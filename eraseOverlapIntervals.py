@@ -5,7 +5,7 @@
 # Make the left most interval the focus
 # Iterate through the sorted list, if the item intersect increment counter, else make it as the new focus
 
-# Since we need to sort, it will take O(n*log(n)), but algorithm itself is O(n).
+# Since we need to sort, it will take O(n*log(n)), but algorithm itself is O(n)!
 
 class Solution:
     def eraseOverlapIntervals(self, intervals: list[list[int]]) -> int:
