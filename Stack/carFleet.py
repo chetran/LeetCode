@@ -1,27 +1,16 @@
+#!/usr/bin/env python3
+
 from collections import deque
 
 class Solution:
     def carFleet(self, target: int, position: list[int], speed: list[int]) -> int:
-        cars = [(position[i], speed[i]) for i in range(len(position))]
-        cars.sort(key=lambda x:x[0])
-        s = deque() 
-        for i in range(len(position)-1, -1, -1):
-            if len(s) > 0:
-                top = s[-1]
-                tleft = (target - top[0]) / top[1]
-                cleft = (target - cars[i][0]) / cars[i][1]
-                print(tleft, cleft)
-                if tleft < cleft:
-                    s.append(cars[i])
-                else:
-                    print(top, cars[i])
-            else: 
-                s.append(cars[i])
-
-        print(s)
+        cars = sorted(zip(position, speed), key=lambda x: -x[0])
+        s = []
+        for c in cars:
+            miles = (target - c[0]) / c[1]
+            if not s or (s and miles > s[-1]):
+                s.append(miles)
         return len(s)
-
-                
 
 def checker(received, answer):
     if received != answer:
@@ -31,5 +20,5 @@ def checker(received, answer):
 
 if __name__ == '__main__':
     solution = Solution()
-    #checker(solution.carFleet(target = 10, position = [1,4], speed = [3,2]), 1)
+    checker(solution.carFleet(target = 10, position = [1,4], speed = [3,2]), 1)
     checker(solution.carFleet(target = 10, position = [4,1,0,7], speed = [2,2,1,1]), 3)
